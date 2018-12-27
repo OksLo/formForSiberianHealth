@@ -23,6 +23,12 @@
 @btn-bg-color: #9aca23;
 @btn-disabled-bg-color: #758191;
 
+@msg-error-color: #eef0f1;
+@msg-error-bg-color: #e1085d;
+
+@icon-success-color: #8ab51f;
+@icon-failed-color: #9d0641;
+
 /* Reset */
 
 * {
@@ -186,11 +192,11 @@ body {
 		right: 0;
 		margin-top: -5px;
 		padding: 12px 17px 5px 17px;
-			border-radius: 0 0 4px 4px;
-			background-color: #e1085d;
-			opacity: 0.97;
+		border-radius: 0 0 4px 4px;
+		background-color: @msg-error-bg-color;
+		opacity: 0.97;
 		letter-spacing: 0.3px;
-		color: #eef0f1;
+		color: @msg-error-color;
 		z-index: 1;
 		transition: opacity .6s;
 
@@ -201,7 +207,7 @@ body {
 			left: 2px;
 			right: 2px;
 			height: 3px;
-				border-radius: 0 0 4px 4px;
+			border-radius: 0 0 4px 4px;
 			background: @control-bg-color;
 		}
 	}
@@ -214,58 +220,14 @@ body {
 		height: 14px;
 
 		&__success {
-			fill: #8ab51f;
+			fill: @icon-success-color;
 		}
 		&__failed {
-			fill: #9d0641;
+			fill: @icon-failed-color;
 		}
 
 		& + .form__input {
 			padding-left: 39px;
 		}
-	}
-}
-
-
-@media all and (max-width: 640px) {
-	
-	.page {
-		&-content {
-			width: calc(100% - 40px);
-		}
-	}
-	.form {
-		&-row {
-			flex-wrap: wrap;
-
-			&.col-3 > * {
-				flex-basis: 100%;
-				flex-shrink: 0;
-				margin-bottom: 10px;
-			}
-
-		}
-
-		&-booking-wrap {
-			min-width: 200px; 
-		}
-
-	}
-}
-
-@media all and (max-width: 320px) {
-	
-	.form {
-		&-row {
-
-			&.col-2 > * {
-				flex-basis: 100%;
-				flex-shrink: 0;
-				margin-bottom: 10px;
-			}
-
-		}
-
-
 	}
 }

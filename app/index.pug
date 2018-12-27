@@ -2,18 +2,18 @@ doctype html
 html(lang='en', ng-app='formApp')
 	head
 		meta(charset = 'utf-8')
-		meta(name='viewport', content="initial-scale=1.0, width=device-width")
+		meta(name='viewport', content='initial-scale=1.0, width=device-width')
 		title Test task for SiberianHealth
 		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js')
-		script(src='js/script.js')
 		link(href='css/styles.css', rel='stylesheet')
+		script(src='js/script.js')
 	body
 		div.page
 			h1.page__title Тестовое задание
 			div.page__content(ng-controller='formController')
-				form.form(name='formTest', ng-class="{'form__hidden': formSent}", ng-submit='submitForm($event)')
+				form.form(name='formTest', ng-class='{"form__hidden": formSent}', ng-submit='submitForm($event)')
 					div.form__row(ng-repeat='field in fields')
 						input-field(field='field')
 					div.form__row.form__row__btn
-						button.form__btn(type="submit", ng-disabled="!formTest.$valid") Ввод
-				div.report(ng-class="{'report__shown': formSent}") Ваше сообщение отправлено
+						button.form__btn(type='submit', ng-disabled='!formTest.$valid') Ввод
+				div.report(ng-class='{"report__shown": formSent}') Ваше сообщение отправлено

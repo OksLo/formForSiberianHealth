@@ -24,10 +24,9 @@
 			}
 		];
 		$scope.formSent = false;
-
 		$scope.submitForm = (event) => {
 			event.preventDefault();
-			sendData('https://test.com', $scope.fields);
+			sendData('/api', $scope.fields);
 		};
 
 		function sendData(url, data) {
@@ -54,15 +53,14 @@
 					<svg class='form__icon form__icon__{{$ctrl.field.status}}' ng-if='$ctrl.field.status'>
 						<use xlink:href="{{'img/icons.svg#'+$ctrl.field.status}}">
 					</svg>
-					<input class="form__input" type="{{$ctrl.field.type}}" id="form__control__{{$ctrl.field.name}}" name="{{$ctrl.field.name}}" placeholder="{{$ctrl.field.placeholder}}" required ng-model="$ctrl.field.value" ng-class="{'form__input__invalid': $ctrl.field.errorMsg, 'form__input__failed': $ctrl.field.status === 'failed', 'form__input__success': $ctrl.field.status === 'success'}" ng-change="$ctrl.validateField($event, $ctrl.field.name)">
+					<input class="form__input" type="{{$ctrl.field.type}}" id="form__control__{{$ctrl.field.name}}" name="{{$ctrl.field.name}}" placeholder="{{$ctrl.field.placeholder}}" required ng-model="$ctrl.field.value" ng-class="{'form__input__invalid': $ctrl.field.errorMsg, 'form__input__failed': $ctrl.field.status === 'failed', 'form__input__success': $ctrl.field.status === 'success'}" ng-change="$ctrl.validateField($ctrl.field.name)" ng-blur="$ctrl.validateField($ctrl.field.name)">
 					<label class="form__label" for="form__control__{{$ctrl.field.name}}">{{$ctrl.field.label}}</label>
 					<span class="form__error-msg" ng-show="$ctrl.field.errorMsg">{{$ctrl.field.errorMsg}}</span>
 				</div>
 			`,
 			controller ($scope, $element, $attrs) {
 				let ctrl = this;
-				console.log('$scope: ', $scope.$parent.$parent.formTest);
-				ctrl.validateField = (event, fieldName) => {
+				ctrl.validateField = (fieldName) => {
 					if (formTest[fieldName].checkValidity()) {
 						ctrl.field.errorMsg = '';
 					} else if (formTest[fieldName].validity.typeMismatch) {
@@ -76,7 +74,7 @@
 					if (field.errorMsg) {
 						field.status = '';
 						$scope.$parent.$parent.formTest[field.name].$setValidity('status', true)
-					} else if (Math.random() * 10 > 5) {
+					} else if (field.value.length %2 ) {
 						field.status = 'failed';
 						field.errorMsg = 'Истек период ожидания';
 						$scope.$parent.$parent.formTest[field.name].$setValidity('status', false)
